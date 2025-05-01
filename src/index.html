@@ -26,9 +26,19 @@
 
       <!-- Upgrades Section (Right) -->
       <aside class="w-80 bg-gray-800 p-4 rounded-lg shadow space-y-6">
+        <div>
+          <h2 class="text-xl text-green-400 font-bold mb-2">Upgrades</h2>
+          <button onclick="buyclicker()" id="clickerbuy" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded mb-2">
+            Clicker [$100]
+          </button>
+          <button onclick="Ultraclickerbuys()" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded font-display">
+            Ultra Clicker [$2000]
+          </button>
+        </div>
+
         <!-- Cursors -->
         <div>
-          <h2 class="text-xl text-green-400 font-bold mb-2">Cursors</h2>
+          <h2 class="text-xl text-green-400 font-bold mb-2">Buildings</h2>
           <button onclick="BuyCursors()" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded mb-2">
             Cursor [$<span id="cursorCost">2</span>] — <span id="cursors">0</span>
           </button>
@@ -38,15 +48,7 @@
         </div>
 
         <!-- Buildings -->
-        <div>
-          <h2 class="text-xl text-green-400 font-bold mb-2">Buildings</h2>
-          <button onclick="buyclicker()" id="clickerbuy" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded mb-2">
-            Clicker [$100]
-          </button>
-          <button onclick="Ultraclickerbuys()" class="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded">
-            Ultra Clicker [$2000]
-          </button>
-        </div>
+        
       </aside>
 
     </main>

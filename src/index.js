@@ -186,16 +186,47 @@ const achievements = [
 
 
 function displayAchievement(achievement) {
+    let container = document.getElementById("achievement-container");
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "achievement-container";
+
+        // Mobile: bottom-left
+        // Desktop (sm+): top-left
+        container.className = `
+            fixed 
+            bottom-5 left-5 
+            sm:top-5 sm:bottom-auto
+            flex flex-col gap-2 items-start z-50
+        `.replace(/\s+/g, ' ').trim();
+
+        document.body.appendChild(container);
+    }
+
     const notification = document.createElement("div");
-    notification.className = "fixed top-5 right-5 bg-green-500 text-white p-4 rounded-lg shadow-lg text-lg";
+    notification.className = `
+        bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg
+        text-sm sm:text-base max-w-[90%] w-fit
+    `.replace(/\s+/g, ' ').trim();
+
     notification.innerText = `🎉 Achievement Unlocked: ${achievement.name} - ${achievement.description}`;
-    
-    document.body.appendChild(notification);
+
+    container.appendChild(notification);
 
     setTimeout(() => {
         notification.remove();
+        if (container.childElementCount === 0) {
+            container.remove();
+        }
     }, 5000);
 }
+
+
+
+
+
+
+
 
 
 

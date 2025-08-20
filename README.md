@@ -41,3 +41,10 @@ the game now has a custom server to host the game.
 please install the dependencies before using.
 
 the server is built using express js
+
+
+# mirror
+
+this project is being mirrored to gitlab.
+
+check the gitlab repository at https://gitlab.com/moneyclick/Moneyclick

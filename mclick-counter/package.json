@@ -1,0 +1,12 @@
+{
+  "name": "mclick-counter",
+  "version": "0.7.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "randomusert",
+  "license": "MIT",
+  "description": "a custom large counter for mclick game and easy to make large counters"
+}

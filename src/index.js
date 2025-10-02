@@ -1,7 +1,5 @@
 //variables
 //sets variable called score to zero
-
-
 var score = 0;
 var cursorCost = 2;
 var cursors = 0;
@@ -18,9 +16,49 @@ var prestigePoints = 0 //prestige points
 var requiredMoney = 1000000 //money required to prestige
 var prestigeMultiplier = 1.2 //multiplier for prestige points
 
+function constructor(initialValue = 0n)
+{
+    this.value = BigInt(initialValue);
+}
+function increment(amount = 1n)
+{
+    this.value += BigInt(amount);
+}
+function set(value) 
+{
+    this.value = BigInt(value);
+}
+function get() 
+{
+    console.log(this.value)
+}
+// Format as words (e.g., "1.2 million", "3.4 billion", etc.)
+function format(value)
+{
+    this.value = BigInt(value);
+    const units = [
+        { suffix: "decillion", value: 10n ** 33n },
+        { suffix: "nonillion", value: 10n ** 30n },
+        { suffix: "octillion", value: 10n ** 27n },
+        { suffix: "septillion", value: 10n ** 24n },
+        { suffix: "sextillion", value: 10n ** 21n },
+        { suffix: "quintillion", value: 10n ** 18n },
+        { suffix: "quadrillion", value: 10n ** 15n },
+        { suffix: "trillion",    value: 10n ** 12n },
+        { suffix: "billion",     value: 10n ** 9n },
+        { suffix: "million",     value: 10n ** 6n },
+        { suffix: "thousand",    value: 10n ** 3n }
+    ];
 
-console.log('MclickCounter loaded:', MclickCounter.version());
-
+    for (const unit of units) {
+        if (this.value >= unit.value) {
+            const whole = this.value / unit.value;
+            const decimal = (this.value % unit.value) / (unit.value / 10n);
+            return `${whole}.${decimal} ${unit.suffix}`;
+        }
+    }
+    return this.value.toString(); // just show number for small values
+}
 //load the save on the website loading
 window.onload = function() {
     Load()
@@ -54,10 +92,13 @@ function BuySuperCursors() {
 
 
 function getmoney() {
+    var formatedScorse = format(score)
+    document.getElementById("score").innerHTML = formatedScorse;
     score = score + clickPower;
     game.clicks++;
     game.totalMoney += clickPower;
-    document.getElementById("score").innerHTML = score;
+    
+    //document.getElementById("score").innerHTML = formatedScorse;
 }
 
 
@@ -283,7 +324,6 @@ function givePrestigePoints() {
     if (game.totalMoney >= requiredMoney) {
         prestigePoints++;
         game.totalMoney = 0; // Reset total money after prestiging
-        alert("You have prestiged and earned a prestige point!");
         game.clicks = 0;
         game.clickers = 0;
         game.prestigePoints += 1;
@@ -291,4 +331,4 @@ function givePrestigePoints() {
         clickPower = game.clickPower;
     }
 }
-
+ 

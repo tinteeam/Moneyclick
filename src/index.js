@@ -1,6 +1,7 @@
 //variables
 //sets variable called score to zero
 
+
 var score = 0;
 var cursorCost = 2;
 var cursors = 0;
@@ -13,6 +14,12 @@ var superclicker = 0
 var superclickerCost = 1000
 var Ultraclicker = 2000
 var UltraclickerCost = 0
+var prestigePoints = 0 //prestige points
+var requiredMoney = 1000000 //money required to prestige
+var prestigeMultiplier = 1.2 //multiplier for prestige points
+
+
+console.log('MclickCounter loaded:', MclickCounter.version());
 
 //load the save on the website loading
 window.onload = function() {
@@ -50,7 +57,6 @@ function getmoney() {
     score = score + clickPower;
     game.clicks++;
     game.totalMoney += clickPower;
-    
     document.getElementById("score").innerHTML = score;
 }
 
@@ -135,6 +141,7 @@ const game = {
     clicks: 0,
     totalMoney: 0,
     clickers: 0,
+    prestigePoints: 0,
     // Other game properties
 };
 
@@ -175,16 +182,18 @@ const achievements = [
         description: "click one million times. grazy to get without an auto clicker",
         condition: (game) => game.clicks >= 1000,
         unlocked: false
+    },
+    {
+        id: "first_prestige",
+        name: "Prestige!",
+        description: "Prestige for the first time.",
+        condition: (game) => game.prestigePoints >= 1,
+        unlocked: false
     }
 ];
 
 
-
 // advancements
-
-
-
-
 function displayAchievement(achievement) {
     let container = document.getElementById("achievement-container");
     if (!container) {
@@ -222,14 +231,6 @@ function displayAchievement(achievement) {
 }
 
 
-
-
-
-
-
-
-
-
 function checkAchievements() {
     achievements.forEach(achievement => {
         if (!achievement.unlocked && achievement.condition(game)) {
@@ -250,7 +251,6 @@ function disableclickerbuy() {
 }
 
 // building upgrades
-
 function buyclicker() {
     if (score == clickerCost) {
         clicker++
@@ -277,3 +277,18 @@ function Ultraclickerbuys() {
        disableUltraclicker()
     } 
 }
+
+// prestige system
+function givePrestigePoints() {
+    if (game.totalMoney >= requiredMoney) {
+        prestigePoints++;
+        game.totalMoney = 0; // Reset total money after prestiging
+        alert("You have prestiged and earned a prestige point!");
+        game.clicks = 0;
+        game.clickers = 0;
+        game.prestigePoints += 1;
+        game.clickPower = Math.round(game.clickPower * prestigeMultiplier);
+        clickPower = game.clickPower;
+    }
+}
+
